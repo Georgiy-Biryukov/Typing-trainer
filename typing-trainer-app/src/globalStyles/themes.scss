@@ -1,0 +1,15 @@
+html[data-theme='dark'] {
+  --main-bg-color: #0a335c;
+  --mobile-menu-bg-color: #00acff;
+  --main-color-text: white;
+  --mobile-menu-color-text: white;
+  --hover-bg-color: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme='light'] {
+  --main-bg-color: white;
+  --mobile-menu-bg-color: #00acff;
+  --main-color-text: #0a335c;
+  --mobile-menu-color-text: white;
+  --hover-bg-color: #f3f5f7;
+}

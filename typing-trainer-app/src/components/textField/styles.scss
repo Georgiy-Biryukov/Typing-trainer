@@ -1,0 +1,42 @@
+.open {
+  animation: Open;
+}
+
+.open g .mouth {
+  animation: Open infinite 2s linear;
+
+  transform-origin: center top;
+}
+
+@keyframes Open {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(12deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.close {
+  animation: Open;
+}
+
+.close g .mouth {
+  animation: Close 2s linear;
+  transform-origin: center top;
+}
+
+@keyframes Close {
+  0% {
+    transform: rotate(12deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

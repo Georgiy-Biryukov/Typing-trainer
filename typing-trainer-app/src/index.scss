@@ -1,0 +1,30 @@
+@import url(./globalStyles/fonts.scss);
+@import url(./globalStyles/themes.scss);
+
+#wrapper {
+  background-color: var(--main-bg-color);
+  overflow: hidden;
+}
+
+#main {
+  color: var(--main-color-text);
+}
+
+.word {
+  min-width: 33px;
+  display: inline-block;
+
+  user-select: none;
+}
+
+.holder:focus {
+  outline: none;
+  border: none;
+  box-shadow: inset;
+}
+
+.cheet {
+  width: 50%;
+  min-width: 300px;
+  writing-mode: vertical-lr;
+}

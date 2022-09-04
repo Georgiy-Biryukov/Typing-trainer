@@ -7,46 +7,96 @@ import { ReactComponent as Bird } from '../../assets/bird.svg';
 
 import './styles.scss';
 
+// const rusLower = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+// const rusUpper = rusLower.toUpperCase()
+// const enLower = 'abcdefghijklmnopqrstuvwxyz'
+// const enUpper = enLower.toUpperCase()
+// const rus = rusLower + rusUpper
+// const en = enLower + enUpper
+
+
+// const char = getChar(e)
+// if (rus.includes(char)) {
+//   console.log('ru'); 
+// } else if (en.includes(char)) {
+//   console.log('en'); 
+// } else {
+//   console.log('хз'); 
+// }
+
+
 export const TextField = () => {
   const [pressKey, setPresskey] = useState(false);
+  const [timer, setTimer] = useState(60)
+  const [isCounting, setIsCounting] = useState(false)
   const text = useSelector((state) => state.typing.textValue);
   const dispatch = useDispatch();
 
+
+  console.log(pressKey);
+
   const textFieldRef = useRef();
+  // const getChar = (event) => String.fromCharCode(event.keyCode || event.charCode)
 
   useEffect(() => {
     textFieldRef.current.focus();
-  }, []);
+    const interval = setInterval(() => {
+      isCounting && setTimer((timer) => timer >= 1 ? timer -1 : 0)
+    }, 1000);
+    return () => clearInterval(interval)
+  }, [isCounting]);
+
+  const startCounting = ()=>{
+    setIsCounting(true)
+  }
+
+  const stopCounting = ()=>{
+    setIsCounting(false)
+  }
+
+
+
+  const startAnimate = () =>{
+    setPresskey(true);
+  }
+
+  const stopAnimate = () =>{
+    setPresskey(false);
+  }
 
   const onKeyPressed = (e) => {
     if (e) {
       const indexOfWord = text.indexOf(e.key);
 
       if ((indexOfWord < 1) & (e.key === text[0])) {
-        setPresskey(true);
-        dispatch(changeTextField(indexOfWord));
-        setTimeout(() => {
-          setPresskey(false);
-        }, 1500);
+        startCounting()
+        startAnimate()
+        dispatch(changeTextField(indexOfWord)); 
       }
     }
   };
+
+
 
   return (
     <>
       <div
         onKeyDown={onKeyPressed}
-        tabIndex="99"
+        tabIndex="1"
         autoFocus
         className="holder"
         ref={textFieldRef}
       >
-        {/* <div style={{ display: 'flex' }}>
-          <p style={{ padding: '50px' }}>trues - {interval}</p>
-          <p style={{ padding: '50px' }}>trues - {count}</p>
-          <p style={{ padding: '50px' }}>errors - {error}</p>
+          <p style={{ padding: '50px' }}>trues - {timer}</p>
+        {
+          text.length === 0 &&   <div style={{ display: 'flex' }}>
+          <p style={{ padding: '50px' }}>trues - {'interval'}</p>
+          <p style={{ padding: '50px' }}>trues - {timer}</p>
+          <p style={{ padding: '50px' }}>errors - {'error'}</p>
         </div>
-        <button onClick={restart}>restart</button> */}
+        }
+      
+      
         <div
           style={{
             display: 'flex',
@@ -56,19 +106,12 @@ export const TextField = () => {
             width: 'max-content',
           }}
         >
-          <Bird className={pressKey ? 'open' : ''} />
-          <p
-            style={{
-              paddingTop: '20px',
-              fontSize: '120px',
-              fontWeight: 700,
-            }}
-            autoFocus={true}
-          >
-            {text.map((el) => {
-              return <span className="word">{el}</span>;
+          <Bird className={pressKey ? 'bird-animated': ''} onAnimationEnd={()=>stopAnimate()}/>
+          <div className='typingText'>
+            {text.map((el,index) => {
+              return <span className="word" key={index + el}>{el}</span>;
             })}
-          </p>
+          </div>
         </div>
       </div>
     </>

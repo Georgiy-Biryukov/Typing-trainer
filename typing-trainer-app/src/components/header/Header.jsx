@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ export const Header = () => {
     setTheme('dark');
   };
 
-  console.log(restart());
+
 
   const navDropdownTitle = (
     <p>

@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const textValue = 'Type me to find out how many words per minute you can type';
+const textValue = "Type me to find out how many words per minute you can type";
 
 let typingText = [];
 
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export const typingFieldReducer = createSlice({
-  name: 'typingField',
+  name: "typingField",
   initialState,
   reducers: {
     restart: (state) => {
